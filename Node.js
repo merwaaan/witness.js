@@ -1,4 +1,4 @@
-const nodeRadius = 5;
+const nodeRadius = 8;
 
 class Node {
 
@@ -13,7 +13,28 @@ class Node {
       edgeThickness * 0.5 + (edgeThickness + cellSize) * this.x,
       edgeThickness * 0.5 + (edgeThickness + cellSize) * this.y,
       nodeRadius)
-      .attr('fill', 'black');
+      .addClass('node');
+  }
+
+  get top() {
+    return this.y > 0 ? this.puzzle.nodes[this.index - this.puzzle.width - 1] : null;
+  }
+
+  get right() {
+    return this.x < this.puzzle.width ? this.puzzle.nodes[this.index + 1] : null;
+  }
+
+  get bottom() {
+    return this.y < this.puzzle.height ? this.puzzle.nodes[this.index+ this.puzzle.width + 1] : null;
+  }
+
+  get left() {
+    return this.x > 0 ? this.puzzle.nodes[this.index - 1] : null;
+  }
+
+  get neighbors() {
+    return [this.top, this.right, this.bottom, this.left]
+      .filter(n => n !== null);
   }
 
   get position() {
@@ -22,7 +43,7 @@ class Node {
 
   start() {
     this.start = true;
-    this.svg.attr('fill', 'yellow');
+    this.svg.addClass('start');
 
     this.svg.mousedown(event => this.puzzle.startPath(this));
 
@@ -31,7 +52,7 @@ class Node {
 
   end() {
     this.end = true;
-    this.svg.attr('fill', 'pink');
+    this.svg.addClass('end');
 
     this.svg.mouseup(event => this.puzzle.stopPath(this));
 

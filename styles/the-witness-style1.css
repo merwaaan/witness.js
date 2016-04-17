@@ -1,0 +1,28 @@
+.puzzle {
+  background-color: #949495;
+}
+
+.cell {
+  fill: transparent;
+}
+
+.node {
+  fill: #5E6365;
+}
+
+.node.start {
+  fill: pink;
+}
+
+.node.end {
+  fill: red;
+}
+
+.edge {
+  stroke: #5E6365;
+  stroke-width: 3px;
+}
+
+.path {
+  stroke: #988881;
+}

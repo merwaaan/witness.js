@@ -12,7 +12,19 @@ class Path {
     this.svgSegments = [this.puzzle.svg.line(x, y, x, y).attr('stroke', 'red')];
   }
 
+  clear() {
+    for (let segment of this.svgSegments)
+      segment.remove();
+  }
+
   update(x, y) {
+
+    this.svgSegments[this.svgSegments.length - 1].attr({
+      x2: x,
+      y2: y
+    });
+
+    // TODO study in-game interaction
 
     /*if (this.previousMousePosition == null)
       this.previousMousePosition = [x, y];

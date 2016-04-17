@@ -13,7 +13,7 @@ class Cell {
       cellSize * this.y + edgeThickness * (this.y + 1),
       cellSize,
       cellSize)
-      .attr('fill', 'red');
+      .addClass('cell');
   }
 
   get topLeft() {
