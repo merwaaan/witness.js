@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="author" content="Merwan Achibet">
+
+  <script src="lib/snap.svg.js"></script>
+  <script src="Path.js"></script>
+  <script src="Cell.js"></script>
+  <script src="Node.js"></script>
+  <script src="Puzzle.js"></script>
+</head>
+<body>
+
+  <section></section>
+
+  <script>
+    puzzle = new Puzzle(4, 4, document.querySelector('section'));
+
+    puzzle.cell(0, 0)
+      .topLeft
+      .start();
+
+    puzzle.cell(3, 3)
+      .bottomRight
+      .end();
+
+    puzzle.addRule((puzzle, path) => {
+
+    });
+  </script>
+
+</body>
+</html>
