@@ -38,7 +38,7 @@ class Node {
   }
 
   get position() {
-    return [this.svg.attr('cx'), this.svg.attr('cy')];
+    return [parseInt(this.svg.attr('cx')), parseInt(this.svg.attr('cy'))];
   }
 
   start() {
