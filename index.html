@@ -25,10 +25,19 @@
     puzzle.cell(0, 0).topLeft.start();
     puzzle.cell(3, 3).bottomRight.end();
 
-    puzzle.node(1, 1).token(TextToken, 'AAA');
+    puzzle.node(1, 1).token(TextToken, 'A');
+    puzzle.node(3, 2).token(TextToken, 'B');
+    puzzle.node(0, 4).token(TextToken, 'C');
 
     puzzle.addRule((puzzle, path) => {
+      // TODO add nice API to query path, tokens, etc...
+      var word = path.nodes
+        .map(n => n.tokens[0])
+        .filter(t => t !== undefined)
+        .map(t => t.text)
+        .join('');
 
+      return word === 'ABC';
     });
   </script>
 
