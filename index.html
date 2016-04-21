@@ -12,6 +12,8 @@
   <script src="Path.js"></script>
   <script src="Cell.js"></script>
   <script src="Node.js"></script>
+  <script src="Token.js"></script>
+  <script src="TextToken.js"></script>
   <script src="Puzzle.js"></script>
 </head>
 <body>
@@ -20,14 +22,10 @@
 
   <script>
     puzzle = new Puzzle(4, 4, document.querySelector('section'));
+    puzzle.cell(0, 0).topLeft.start();
+    puzzle.cell(3, 3).bottomRight.end();
 
-    puzzle.cell(0, 0)
-      .topLeft
-      .start();
-
-    puzzle.cell(3, 3)
-      .bottomRight
-      .end();
+    puzzle.node(1, 1).token(TextToken, 'AAA');
 
     puzzle.addRule((puzzle, path) => {
 

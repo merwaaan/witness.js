@@ -9,11 +9,14 @@ class Node {
     this.x = index % (puzzle.width + 1);
     this.y = Math.floor(index / (puzzle.width + 1));
 
-    this.svg = this.puzzle.svg.circle(
+    this.svg = this.puzzle.svg.svg();
+    this.icon = this.svg.circle(
       edgeThickness * 0.5 + (edgeThickness + cellSize) * this.x,
       edgeThickness * 0.5 + (edgeThickness + cellSize) * this.y,
       nodeRadius)
       .addClass('node');
+
+    this.tokens = [];
   }
 
   get top() {
@@ -38,14 +41,14 @@ class Node {
   }
 
   get position() {
-    return [parseInt(this.svg.attr('cx')), parseInt(this.svg.attr('cy'))];
+    return [parseInt(this.icon.attr('cx')), parseInt(this.icon.attr('cy'))];
   }
 
   start() {
     this.start = true;
-    this.svg.addClass('start');
+    this.icon.addClass('start');
 
-    this.svg.mousedown(event => this.puzzle.startPath(this));
+    this.icon.mousedown(event => this.puzzle.startPath(this));
 
     return this;
   }
@@ -57,5 +60,11 @@ class Node {
     this.svg.mouseup(event => this.puzzle.stopPath(this));
 
     return this;
+  }
+
+  token(TokenType, ...tokenParams) {
+    var token = new TokenType(this, ...tokenParams);
+    this.tokens.push(token);
+    token.attach(this.svg);
   }
 }

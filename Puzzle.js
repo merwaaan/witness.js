@@ -55,7 +55,7 @@ class Puzzle {
     });
 
     // TODO on document instead?
-    this.svg.mouseup(event => {
+    document.addEventListener('mouseup', event => {
       if (this.dragging)
         this.stopPath();
     });
@@ -65,20 +65,26 @@ class Puzzle {
     return this.cells[this.width * y + x]
   }
 
+  node(x, y) {
+    return this.nodes[(this.width + 1) * y + x];
+  }
+
   addRule(rule) {
     this.rules.push(rule);
   }
 
   check(path) {
-    console.log('checking stuff...');
     return this.rules.every(e => e(this, path));
   }
 
   startPath(node) {
+
+    // Clear any previous path
+    if (this.path)
+      this.path.clear();
+
     this.path = new Path(this, node);
     this.dragging = true;
-
-    console.log('dragging starts');
   }
 
   stopPath(node) {
@@ -89,9 +95,13 @@ class Puzzle {
       this.path = null;
     }
     else {
-      this.check(this.path);
+      if (this.check(this.path))
+        console.log('solution found');
+      else {
+        console.log('wrong solution');
+        this.path.clear();
+        this.path = null;
+      }
     }
-
-    console.log('dragging stops');
   }
 }
